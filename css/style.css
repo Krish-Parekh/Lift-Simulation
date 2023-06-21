@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap");
+:root {
+  --font-family: "Figtree", sans-serif;
+
+  --primary-color: #007bff;
+  --primary-color-dark: #0056b3;
+  --border-color: #ccc;
+  --border-color-dark: #333;
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --background-color: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #f5f5f5;
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.input-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  box-shadow: 0px 10px 20px var(--box-shadow-color);
+  border-radius: 8px;
+  background-color: var(--background-color);
+  width: 50%;
+  gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .input-card {
+    width: 90%;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.input-group label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.input-group input {
+  width: 100%;
+  font-family: var(--font-family);
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--border-color-dark);
+}
+
+.button-submit {
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  font-family: var(--font-family);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-submit:hover {
+  background-color: var(--primary-color-dark);
+}
+
+/* Lift Simulation */
+.floors-container {
+  width: 80%;
+  display: flex;
+  gap: 18px;
+  padding: 12px;
+  margin-block: 20px;
+  flex-direction: column;
+  border: 2px solid black;
+}
+
+.floor-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+  padding-inline: 12px;
+  border: 2px solid black;
+}
+
+.floor-controller {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.floor-number {
+  font-size: 1.5rem;
+}
+
+.button-up,
+.button-down {
+  margin: 5px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-up:hover,
+.button-down:hover {
+  background-color: #0056b3;
+}
+
+.lifts {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+}
+
+.lift {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid black;
+}
+
+.left-door,
+.right-door {
+  border: 2px solid black;
+  width: 50%;
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: 1s ease-in-out;
+}
