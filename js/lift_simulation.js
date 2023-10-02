@@ -108,7 +108,7 @@ createFloorsAndLifts();
 
 function moveLift(lift, floor) {
   lift.busy = true;
-  let time = Math.abs(lift.currentFloor - floor) * 1000;
+  let time = Math.abs(lift.currentFloor - floor) * 2000;
 
   let liftContainer = document.querySelector(`#lift-${lift.id}`);
   liftContainer.style.transition = `all ${time}ms ease-in-out`;

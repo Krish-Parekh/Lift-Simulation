@@ -2,17 +2,25 @@ const submitButton = document.querySelector(".button-submit");
 const floorInput = document.querySelector("#floor");
 const liftInput = document.querySelector("#lift");
 
+const MOBILE_SCREEN_SIZE = 768;
+const IPAD_SCREEN_SIZE = 1024;
+const DESKTOP_SCREEN_SIZE = 1440;
+
+const MAX_LIFTS_MOBILE = 1;
+const MAX_LIFTS_IPAD = 3;
+const MAX_LIFTS_DESKTOP = 6;
+
 function checkScreenWidth() {
   let maxLifts;
-  if (window.innerWidth <= 768) {
-    liftInput.placeholder = "Max 1 on mobile screens";
-    maxLifts = 1;
-  } else if (window.innerWidth <= 1024) {
-    liftInput.placeholder = "Max 3 on iPad screens";
-    maxLifts = 3;
+  if (window.innerWidth <= MOBILE_SCREEN_SIZE) {
+    liftInput.placeholder = `Max ${MAX_LIFTS_MOBILE} on mobile screens`;
+    maxLifts = MAX_LIFTS_MOBILE;
+  } else if (window.innerWidth <= IPAD_SCREEN_SIZE) {
+    liftInput.placeholder = `Max ${MAX_LIFTS_IPAD} on iPad screens`;
+    maxLifts = MAX_LIFTS_IPAD;
   } else {
-    liftInput.placeholder = "Max 5 on desktop screens";
-    maxLifts = 5;
+    liftInput.placeholder = `Max ${MAX_LIFTS_DESKTOP} on desktop screens`;
+    maxLifts = MAX_LIFTS_DESKTOP;
   }
   liftInput.setAttribute("max", maxLifts);
 }
