@@ -6,9 +6,9 @@ const MOBILE_SCREEN_SIZE = 768;
 const IPAD_SCREEN_SIZE = 1024;
 const DESKTOP_SCREEN_SIZE = 1440;
 
-const MAX_LIFTS_MOBILE = 1;
-const MAX_LIFTS_IPAD = 3;
-const MAX_LIFTS_DESKTOP = 6;
+const MAX_LIFTS_MOBILE = 3;
+const MAX_LIFTS_IPAD = 6;
+const MAX_LIFTS_DESKTOP = 11;
 
 function checkScreenWidth() {
   let maxLifts;

@@ -145,7 +145,7 @@ body {
 
 .lift {
   display: flex;
-  width: 100px;
+  width: 80px;
   height: 100px;
   overflow: hidden;
   position: relative;
@@ -159,4 +159,47 @@ body {
   height: 100%;
   background-color: var(--primary-color);
   transition: 1s ease-in-out;
+}
+
+/* Media Query for Mobile */
+@media screen and (max-width: 500px) {
+  .lift {
+    width: 60px;
+    height: 100px;
+  }
+
+  .floors-container {
+    width: 100%;
+  }
+
+  .floor-number {
+    font-size: 1rem;
+  }
+
+  .button-up,
+  .button-down {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Media Query for iPad */
+@media screen and (min-width: 501px) and (max-width: 900px) {
+  .floors-container {
+    width: 100%;
+  }
+  .floor-number {
+    font-size: 1.2rem;
+  }
+  .button-up,
+  .button-down {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
