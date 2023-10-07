@@ -7,7 +7,7 @@ const CURRENT_FLOOR = 1;
 
 
 resetButton.addEventListener("click", () => {
-  window.location.replace("index.html");
+  window.location.replace("/Lift-Simulation/");
 });
 
 class Lift {
