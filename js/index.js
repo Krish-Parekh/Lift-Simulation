@@ -32,21 +32,19 @@ window.addEventListener("resize", checkScreenWidth);
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
 
-  let numberOfFloors = floorInput.value;
-  let numberOfLifts = liftInput.value;
-
-  if (parseInt(liftInput.value) > parseInt(liftInput.max)) {
-    alert(`Exceeds maximum lift count. The maximum number of lifts for your screen size is ${liftInput.max}.`);
+  let numberOfFloors = parseInt(floorInput.value);
+  let numberOfLifts = parseInt(liftInput.value);
+  
+  if (numberOfFloors <= 0 || numberOfLifts <= 0) {
+    alert("Please enter positive values for both fields.");
+  } else if (numberOfLifts > numberOfFloors) {
+    alert("The number of lifts should be less than or equal to the number of floors.");
   } else {
-    if (numberOfFloors && numberOfLifts) {
-      localStorage.setItem("numberOfFloors", numberOfFloors);
-      localStorage.setItem("numberOfLifts", numberOfLifts);
-      floorInput.value = "";
-      liftInput.value = "";
-      window.location.href = "lift_simulation.html";
-      console.log("Data saved in local storage.");
-    } else {
-      console.log("Please fill in both fields before submitting.");
-    }
+    localStorage.setItem("numberOfFloors", numberOfFloors);
+    localStorage.setItem("numberOfLifts", numberOfLifts);
+    floorInput.value = "";
+    liftInput.value = "";
+    window.location.replace("lift_simulation.html");
+    console.log("Data saved in local storage.");
   }
 });

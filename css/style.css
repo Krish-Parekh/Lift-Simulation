@@ -89,6 +89,31 @@ body {
 }
 
 /* Lift Simulation */
+
+.floor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.button-reset {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  font-family: var(--font-family);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-reset:hover {
+  background-color: var(--primary-color-dark);
+}
+
 .floors-container {
   width: 80%;
   display: flex;

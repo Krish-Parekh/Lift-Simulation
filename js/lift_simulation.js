@@ -1,8 +1,14 @@
 const floorsContainer = document.querySelector(".floors-container");
+const resetButton = document.querySelector(".button-reset");
 
 const DOOR_OPEN_TIME = 2500;
 const DOOR_CLOSE_TIME = 2500;
 const CURRENT_FLOOR = 1;
+
+
+resetButton.addEventListener("click", () => {
+  window.location.replace("index.html");
+});
 
 class Lift {
   constructor(id) {
@@ -40,6 +46,7 @@ function createFloorsAndLifts() {
     floorButtonUp.setAttribute("id", `button-up-${floor}`);
     let buttonUpIcon = document.createElement("i");
     buttonUpIcon.classList.add("fas", "fa-arrow-up");
+
     floorButtonUp.addEventListener("click", () => {
       for (let lift of lifts) {
         if (!lift.busy) {
@@ -48,6 +55,7 @@ function createFloorsAndLifts() {
         }
       }
     });
+
     floorButtonUp.appendChild(buttonUpIcon);
 
     let floorButtonDown = document.createElement("button");
