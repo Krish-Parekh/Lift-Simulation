@@ -10,8 +10,9 @@ const MAX_LIFTS_MOBILE = 3;
 const MAX_LIFTS_IPAD = 6;
 const MAX_LIFTS_DESKTOP = 11;
 
+let maxLifts;
+
 function checkScreenWidth() {
-  let maxLifts;
   if (window.innerWidth <= MOBILE_SCREEN_SIZE) {
     liftInput.placeholder = `Max ${MAX_LIFTS_MOBILE} on mobile screens`;
     maxLifts = MAX_LIFTS_MOBILE;
@@ -34,11 +35,14 @@ submitButton.addEventListener("click", (event) => {
 
   let numberOfFloors = parseInt(floorInput.value);
   let numberOfLifts = parseInt(liftInput.value);
-  
+  console.log("Max Lifts ", maxLifts);
+  console.log("Number of lifts ", numberOfLifts);
   if (numberOfFloors <= 0 || numberOfLifts <= 0) {
     alert("Please enter positive values for both fields.");
   } else if (numberOfLifts > numberOfFloors) {
     alert("The number of lifts should be less than or equal to the number of floors.");
+  } else if( numberOfLifts > maxLifts ) {
+    alert(`The number of lifts should be less than or equal to ${maxLifts}.`);
   } else {
     localStorage.setItem("numberOfFloors", numberOfFloors);
     localStorage.setItem("numberOfLifts", numberOfLifts);
