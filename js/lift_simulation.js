@@ -5,7 +5,6 @@ const DOOR_OPEN_TIME = 2500;
 const DOOR_CLOSE_TIME = 2500;
 const CURRENT_FLOOR = 1;
 
-
 resetButton.addEventListener("click", () => {
   window.location.replace("index.html");
 });
@@ -19,6 +18,8 @@ class Lift {
 }
 
 let lifts = [];
+
+function getAvailableLift() {}
 
 function createFloorsAndLifts() {
   let floorCounts = localStorage.getItem("numberOfFloors");
@@ -44,15 +45,32 @@ function createFloorsAndLifts() {
     let floorButtonUp = document.createElement("button");
     floorButtonUp.classList.add("button-up");
     floorButtonUp.setAttribute("id", `button-up-${floor}`);
+    floorButtonUp.setAttribute("data-floor", floor);
     let buttonUpIcon = document.createElement("i");
     buttonUpIcon.classList.add("fas", "fa-arrow-up");
 
     floorButtonUp.addEventListener("click", () => {
-      for (let lift of lifts) {
-        if (!lift.busy) {
-          moveLift(lift, floor);
-          break;
+      // get the calling floor
+      const callingFloor = parseInt(floorButtonUp.getAttribute("data-floor"));
+
+      // get the minimum distance lift
+      let minDistance = Infinity;
+      let closestLiftIndex = -1;
+
+      for (let i = 0; i < lifts.length; i++) {
+        const lift = lifts[i];
+        const distance = Math.abs(callingFloor - lift.currentFloor);
+
+        // also it should not be busy and distance should be minimum
+        if (distance < minDistance && !lift.busy) {
+          minDistance = distance;
+          closestLiftIndex = i;
         }
+      }
+      // move that closest lift
+      if (closestLiftIndex !== -1) {
+        const closestLift = lifts[closestLiftIndex];
+        moveLift(closestLift, callingFloor);
       }
     });
 
@@ -61,14 +79,31 @@ function createFloorsAndLifts() {
     let floorButtonDown = document.createElement("button");
     floorButtonDown.classList.add("button-down");
     floorButtonDown.setAttribute("id", `button-down-${floor}`);
+    floorButtonDown.setAttribute("data-floor", floor);
     let buttonDownIcon = document.createElement("i");
     buttonDownIcon.classList.add("fas", "fa-arrow-down");
     floorButtonDown.addEventListener("click", () => {
-      for (let lift of lifts) {
-        if (!lift.busy) {
-          moveLift(lift, floor);
-          break;
+      // get the calling floor
+      const callingFloor = parseInt(floorButtonDown.getAttribute("data-floor"));
+
+      // get the minimum distance lift
+      let minDistance = Infinity;
+      let closestLiftIndex = -1;
+
+      for (let i = 0; i < lifts.length; i++) {
+        const lift = lifts[i];
+        const distance = Math.abs(callingFloor - lift.currentFloor);
+
+        // also it should not be busy and distance should be minimum
+        if (distance < minDistance && !lift.busy) {
+          minDistance = distance;
+          closestLiftIndex = i;
         }
+      }
+      // move that closest lift
+      if (closestLiftIndex !== -1) {
+        const closestLift = lifts[closestLiftIndex];
+        moveLift(closestLift, callingFloor);
       }
     });
     floorButtonDown.appendChild(buttonDownIcon);
