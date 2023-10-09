@@ -18,6 +18,7 @@ class Lift {
 }
 
 let lifts = [];
+let occupiedFloors = [];
 
 function getAvailableLift() {}
 
@@ -50,27 +51,29 @@ function createFloorsAndLifts() {
     buttonUpIcon.classList.add("fas", "fa-arrow-up");
 
     floorButtonUp.addEventListener("click", () => {
-      // get the calling floor
       const callingFloor = parseInt(floorButtonUp.getAttribute("data-floor"));
 
-      // get the minimum distance lift
+      if (occupiedFloors.includes(callingFloor)) {
+        return;
+      }
+
       let minDistance = Infinity;
       let closestLiftIndex = -1;
 
       for (let i = 0; i < lifts.length; i++) {
         const lift = lifts[i];
         const distance = Math.abs(callingFloor - lift.currentFloor);
-
-        // also it should not be busy and distance should be minimum
+        
         if (distance < minDistance && !lift.busy) {
           minDistance = distance;
           closestLiftIndex = i;
         }
       }
-      // move that closest lift
+
       if (closestLiftIndex !== -1) {
         const closestLift = lifts[closestLiftIndex];
         moveLift(closestLift, callingFloor);
+        occupiedFloors.push(callingFloor);
       }
     });
 
@@ -83,27 +86,29 @@ function createFloorsAndLifts() {
     let buttonDownIcon = document.createElement("i");
     buttonDownIcon.classList.add("fas", "fa-arrow-down");
     floorButtonDown.addEventListener("click", () => {
-      // get the calling floor
-      const callingFloor = parseInt(floorButtonDown.getAttribute("data-floor"));
+      const callingFloor = parseInt(floorButtonUp.getAttribute("data-floor"));
 
-      // get the minimum distance lift
+      if (occupiedFloors.includes(callingFloor)) {
+        return;
+      }
+
       let minDistance = Infinity;
       let closestLiftIndex = -1;
 
       for (let i = 0; i < lifts.length; i++) {
         const lift = lifts[i];
         const distance = Math.abs(callingFloor - lift.currentFloor);
-
-        // also it should not be busy and distance should be minimum
+        
         if (distance < minDistance && !lift.busy) {
           minDistance = distance;
           closestLiftIndex = i;
         }
       }
-      // move that closest lift
+
       if (closestLiftIndex !== -1) {
         const closestLift = lifts[closestLiftIndex];
         moveLift(closestLift, callingFloor);
+        occupiedFloors.push(callingFloor);
       }
     });
     floorButtonDown.appendChild(buttonDownIcon);
@@ -156,13 +161,15 @@ function moveLift(lift, floor) {
   let liftContainer = document.querySelector(`#lift-${lift.id}`);
   liftContainer.style.transition = `all ${time}ms ease-in-out`;
   liftContainer.style.transform = `translateY(-${(floor - 1) * 170}px)`;
-
   setTimeout(() => {
     openDoors(lift);
     setTimeout(() => {
       closeDoors(lift);
       lift.busy = false;
       lift.currentFloor = floor;
+      occupiedFloors = occupiedFloors.filter((occupiedFloor) => {
+        return occupiedFloor !== floor;
+      });
     }, DOOR_CLOSE_TIME);
   }, DOOR_OPEN_TIME + time);
 }
